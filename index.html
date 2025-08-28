@@ -136,4 +136,37 @@
       { id: 'rail', icon: '🚨', nameBn: 'Bangladesh Railway Helpline', nameEn: 'Bangladesh Railway Helpline', number: '163', category: 'Travel' },
     ];
 
+       let coins = 100;
+    let heartCount = 0;
+    let copyCount = 0;
+    const history = []; 
+    // ====== DOM Refs ======
+    const cardGrid = document.getElementById('cardGrid');
+    const tpl = document.getElementById('cardTemplate');
+    const coinCountEl = document.getElementById('coinCount');
+    const heartCountEl = document.getElementById('heartCount');
+    const copyCountEl = document.getElementById('copyCount');
+    const historyList = document.getElementById('historyList');
+    const historyEmpty = document.getElementById('historyEmpty');
+    const clearHistoryBtn = document.getElementById('clearHistoryBtn');
+
+    // ====== Render Cards ======
+    function renderCards() {
+      const frag = document.createDocumentFragment();
+      services.forEach(svc => {
+        const node = tpl.content.cloneNode(true);
+        const card = node.querySelector('.bg-white');
+        card.dataset.id = svc.id;
+        card.dataset.number = svc.number;
+        card.dataset.name = svc.nameEn;
+
+        card.querySelector('.h-8.w-8').textContent = svc.icon;
+        card.querySelector('.nameBn').textContent = svc.nameBn;
+        card.querySelector('.nameEn').textContent = svc.nameEn;
+        card.querySelector('.number').textContent = svc.number;
+        card.querySelector('.cat').textContent = svc.category;
+        frag.appendChild(node);
+      });
+      cardGrid.appendChild(frag);
+    }
 
